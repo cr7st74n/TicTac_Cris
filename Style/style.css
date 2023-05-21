@@ -25,19 +25,62 @@ body{
     background-color: white;
     border: 2px solid black;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .circle{
-    width:100px;
-    height: 100px;
+    width:90px;
+    height: 90px;
     border-radius: 50%;
     background-color: red;
-
+    border: 2px solid black;
+    box-sizing: border-box;
+    position: relative;
 }
 
+.circle:before{
+    content: "";
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 6px;
+    margin-top: 6px;
+}
+
+
 .xElement{
-    width:100px;
-    height: 100px;
-    border-radius: 5px;
+    width:90px;
+    height: 90px;
+    position: relative;
+}
+
+.xElement:before , .xElement:after {
+    content: '';
+    position: absolute;
     background-color: blue;
+    border: 2px solid black;
+}
+
+.xElement:before {
+    left: 50%;
+    width: 30%;
+    margin-left: -15%;
+    height: 100%;
+    transform: rotate(-45deg);
+}
+
+.xElement:after{
+    left: 50%;
+    width: 30%;
+    margin-left:  -15%;
+    height: 100%;
+    transform: rotate(45deg);
 }

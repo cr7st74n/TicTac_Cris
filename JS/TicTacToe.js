@@ -18,12 +18,13 @@ function createBoard(){
     VectorTTT.forEach((cell, index) =>{
         const cellElement = document.createElement('div');
         cellElement.classList.add('cell');
-        cellElement.addEventListener("click", ()=>{
+        cellElement.id = index
+        cellElement.addEventListener("click", (e)=>{
             if(InfoDisplay.className){
-                insertCircle(cellElement)
+                insertCircle(e)
                 InfoDisplay.classList.remove("player1");
             }else {
-                insertxElement(cellElement)
+                insertxElement(e)
                 InfoDisplay.classList.add("player1");
             }
            
@@ -36,14 +37,16 @@ function createBoard(){
 
 createBoard()
 
-function insertCircle(element){
-    element.classList.remove("cell")
-    element.classList.add("circle")
+function insertCircle(e){
+    const circleElement = document.createElement("div");
+    circleElement.classList.add("circle");
+    e.target.append(circleElement)
 }
 
-function insertxElement(element){
-    element.classList.remove("cell")
-    element.classList.add("xElement")
+function insertxElement(e){
+    const xElementElement = document.createElement("div");
+    xElementElement.classList.add("xElement");
+    e.target.append(xElementElement);
 }
 
 
