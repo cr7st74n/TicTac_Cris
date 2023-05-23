@@ -26,8 +26,10 @@ function createBoard(){
             }else {
                 insertxElement(e)
             }
+                
+            //remove our event listener to prevent of adding new elements on the old ones.
            cellElement.removeEventListener("click",go)
-           PlayOn(cellElement, GameBoard);
+           PlayOn();
 
         })
         console.log('Element Created');
@@ -49,8 +51,7 @@ function insertCircle(e){
     InfoDisplay.className = "player2";
     InfoDisplay.innerHTML = "";
     InfoDisplay.innerHTML = "Second Player 🧛"
-    
-    //remove our event listener to prevent of adding new elements on the old ones.
+
 }
 
 function insertxElement(e){
@@ -69,10 +70,23 @@ function insertxElement(e){
 function PlayOn(){
     const allCells = document.querySelectorAll(".cell");
     const allCircles = document.querySelectorAll(".circle");
-    console.log(allCells);
-    const ComboWinning = [[0,1,2] , [3,4,5], [6,7,8]
+    console.log(allCells[0]);
+
+
+    const ComboWinning = [[0,1,2] , [3,4,5], [6,7,8],
                         [0,3,6], [1,4,7],[2,5,8] ,
                          [0,4,8] , [2,4,6]]
+    
+    ComboWinning.forEach(array => {
+        const circleWins = array.every(square => allCells[square].firstChild?.classList.contains("circle"));
+        const xWins = array.every(square => allCells[square].firstChild?.classList.contains("xElement"));
+
+        if (circleWins) {
+            alert(" Player 1 Won !")
+        }else if (xWins){
+            alert("Player 2 Won !")
+        }
+    })
 
 
 }
