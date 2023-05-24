@@ -3,13 +3,16 @@ const GameBoard = document.querySelector("#gameboard");
 
 const  InfoDisplay = document.querySelector("#info");
 
+const Winner = document.querySelector(".winner");
+const btn = document.querySelector(".btn");
+
 const VectorTTT = ["","", "",
 "","", "",
 "","", ""
 ];
 
 
-InfoDisplay.innerHTML= "First Player 🧙"
+InfoDisplay.innerHTML= "First Player 🧙 Turn"
 InfoDisplay.classList.add("player1")
 
 
@@ -50,7 +53,7 @@ function insertCircle(e){
 
     InfoDisplay.className = "player2";
     InfoDisplay.innerHTML = "";
-    InfoDisplay.innerHTML = "Second Player 🧛"
+    InfoDisplay.innerHTML = "Second Player 🧛 Turn"
 
 }
 
@@ -63,62 +66,58 @@ function insertxElement(e){
 
     InfoDisplay.className = "player1";
     InfoDisplay.innerHTML = "";
-    InfoDisplay.innerHTML = "First Player 🧙"
+    InfoDisplay.innerHTML = "First Player 🧙 Turn"
 }
 //create the game funtionality
 
 function PlayOn(){
     const allCells = document.querySelectorAll(".cell");
-    const allCircles = document.querySelectorAll(".circle");
-    console.log(allCells[0]);
 
+    // Create all the winning combinations
+    const ComboWinning = [[0,1,2] 
+    , [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7],[2,5,8] ,
+    [0,4,8] , [2,4,6]];
 
-    const ComboWinning = [[0,1,2] , [3,4,5], [6,7,8],
-                        [0,3,6], [1,4,7],[2,5,8] ,
-                         [0,4,8] , [2,4,6]]
-    
+    //crete a iteration from the winning possibility array, and then compare every pattern USING .every
     ComboWinning.forEach(array => {
         const circleWins = array.every(square => allCells[square].firstChild?.classList.contains("circle"));
         const xWins = array.every(square => allCells[square].firstChild?.classList.contains("xElement"));
 
         if (circleWins) {
-            alert(" Player 1 Won !")
+            Winner.textContent = "Player 1 Wins !! 😄"
+            allCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
+            if (btn.firstChild){
+                console.log('has a child');
+            }else {
+                ReStartGame();
+            }
         }else if (xWins){
-            alert("Player 2 Won !")
+            Winner.textContent = "Player 2 Wins !! 😄"
+            allCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
+            if (btn.firstChild){
+                console.log('has a child');
+            }else {
+                ReStartGame();
+            }
         }
     })
-
-
 }
 
+function ReStartGame(){
+    console.log('works');
+    const ButtonRestart = document.createElement("button");
+    ButtonRestart.classList = "btn btn-outline-primary";
+    ButtonRestart.innerHTML = "Start Again!";
+    ButtonRestart.type = "button";
 
+    btn.appendChild(ButtonRestart);
 
-
-    // const valueChild = cell.children;
-    // const gameBoard = gameboard.children;
-    // //elements that we need
-    // const IdCell = cell.id
-    // const GameValue =  valueChild[0].className;
-    // console.log(GameValue);
-
-    // // console.log(valueChild);
-
-    // for(let i = 0; i < gameBoard.length; i++){
-    //     if(gameBoard[i].id == "9" ){
-    //         alert("you win")
-    //     }
-    //     console.log(gameBoard[i]);
-    // }
-    // // if ()
-
-
-
-
-//idea of tic tac toe
-// for(let i = 0; i<3 ; i++  ){
-//     for(let j = 0; j <3 ; j++){
-//         console.log(j, i);
-//     }
-// }
-
+    ButtonRestart.addEventListener("click" ,()=>{
+        while(GameBoard.firstChild){
+            GameBoard.removeChild(GameBoard.firstChild);
+        }
+        createBoard();
+    })
+}
 

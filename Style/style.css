@@ -84,3 +84,9 @@ body{
     height: 100%;
     transform: rotate(45deg);
 }
+
+.winner {
+    font-size: 14px;
+    color: red;
+    font-family: cursive;
+}
