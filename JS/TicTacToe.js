@@ -11,7 +11,6 @@ const VectorTTT = ["","", "",
 "","", ""
 ];
 
-
 InfoDisplay.innerHTML= "First Player 🧙 Turn"
 InfoDisplay.classList.add("player1")
 
@@ -86,38 +85,40 @@ function PlayOn(){
 
         if (circleWins) {
             Winner.textContent = "Player 1 Wins !! 😄"
+            Winner.classList = "alert alert-danger";
+            Winner.role = "alert"
             allCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
-            if (btn.firstChild){
-                console.log('has a child');
-            }else {
-                ReStartGame();
-            }
+            ReStartGame()
+
         }else if (xWins){
             Winner.textContent = "Player 2 Wins !! 😄"
+            Winner.classList = "alert alert-info";
+            Winner.role = "alert"
             allCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
-            if (btn.firstChild){
-                console.log('has a child');
-            }else {
-                ReStartGame();
-            }
+            ReStartGame()
         }
     })
+    ReStartGame()
 }
 
 function ReStartGame(){
-    console.log('works');
     const ButtonRestart = document.createElement("button");
     ButtonRestart.classList = "btn btn-outline-primary";
-    ButtonRestart.innerHTML = "Start Again!";
     ButtonRestart.type = "button";
+    ButtonRestart.innerHTML = "Start Again!";
+    
 
-    btn.appendChild(ButtonRestart);
+    if (btn.firstChild){
+        console.log('has a child');
+    }else {
+        btn.appendChild(ButtonRestart);
 
-    ButtonRestart.addEventListener("click" ,()=>{
-        while(GameBoard.firstChild){
-            GameBoard.removeChild(GameBoard.firstChild);
-        }
-        createBoard();
-    })
+        ButtonRestart.addEventListener("click" ,()=>{
+            while(GameBoard.firstChild){
+                GameBoard.removeChild(GameBoard.firstChild);
+            }
+            createBoard();
+        })
+    }
 }
 
