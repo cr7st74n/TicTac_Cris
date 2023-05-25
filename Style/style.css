@@ -1,3 +1,9 @@
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -11,18 +17,20 @@ body{
 
 
 #gameboard {
-    width: 300px;
-    height: 300px;
+    width: 600px;
+    height: 600px;
     background-color: #93B3BF; 
     display:flex;
+    justify-content: center;
     flex-wrap: wrap;
 
 }
 
+
 .cell{
 
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     background-color: #93B3BF;
     border: 2px solid black;
     box-sizing: border-box;
@@ -32,8 +40,8 @@ body{
 }
 
 .circle{
-    width:90px;
-    height: 90px;
+    width: 190px;
+    height: 190px;
     border-radius: 50%;
     background-color: red;
     border: 2px solid black;
@@ -44,22 +52,22 @@ body{
 .circle:before{
     content: "";
     position: absolute;
-    width: 75px;
-    height: 75px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     background-color: #93B3BF;
     border: 2px solid black;
     display:flex;
     justify-content: center;
     align-items: center;
-    margin-left: 6px;
-    margin-top: 6px;
+    margin-left: 12px;
+    margin-top: 12px;
 }
 
 
 .xElement{
-    width:90px;
-    height: 90px;
+    width: 190px;
+    height: 190px;
     position: relative;
 }
 
@@ -87,7 +95,7 @@ body{
 }
 
 .winner {
-    font-size: 18px;
+    font-size: 26px;
     color: red;
     font-family: cursive;
 }
@@ -95,4 +103,84 @@ body{
 #info {
     font-weight: bold;
     font-size: 18px;
+}
+
+@media only screen and (max-width: 700px){
+    #gameboard {
+        width: 300px;
+        height: 300px;
+        background-color: #93B3BF; 
+        display:flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    
+    }
+    .cell{
+
+        width: 100px;
+        height: 100px;
+        background-color: #93B3BF;
+        border: 2px solid black;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .circle{
+        width:90px;
+        height: 90px;
+        border-radius: 50%;
+        background-color: red;
+        border: 2px solid black;
+        box-sizing: border-box;
+        position: relative;
+    }
+    
+    .circle:before{
+        content: "";
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background-color: #93B3BF;
+        border: 2px solid black;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 6px;
+        margin-top: 6px;
+    }
+    
+    
+    .xElement{
+        width:90px;
+        height: 90px;
+        position: relative;
+    }
+    
+    .xElement:before , .xElement:after {
+        content: '';
+        position: absolute;
+        background-color: blue;
+        border: 2px solid black;
+    }
+    
+    .xElement:before {
+        left: 50%;
+        width: 30%;
+        margin-left: -15%;
+        height: 100%;
+        transform: rotate(-45deg);
+    }
+    
+    .xElement:after{
+        left: 50%;
+        width: 30%;
+        margin-left:  -15%;
+        height: 100%;
+        transform: rotate(45deg);
+    }
+
+
 }
