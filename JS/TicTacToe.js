@@ -37,6 +37,7 @@ function createBoard(){
         console.log('Element Created');
         GameBoard.append(cellElement)
     });
+    ReStartGame()
 
 }
 
@@ -71,6 +72,7 @@ function insertxElement(e){
 
 function PlayOn(){
     const allCells = document.querySelectorAll(".cell");
+    const littleCircle = document.querySelector(".circle")
 
     // Create all the winning combinations
     const ComboWinning = [[0,1,2] 
@@ -80,25 +82,24 @@ function PlayOn(){
 
     //crete a iteration from the winning possibility array, and then compare every pattern USING .every
     ComboWinning.forEach(array => {
-        const circleWins = array.every(square => allCells[square].firstChild?.classList.contains("circle"));
+        const circleWins = array.every(square => allCells[square].firstChild?.classList.contains("circle") );
         const xWins = array.every(square => allCells[square].firstChild?.classList.contains("xElement"));
-
         if (circleWins) {
             Winner.textContent = "Player 1 Wins !! 😄"
             Winner.classList = "alert alert-danger";
             Winner.role = "alert"
+            array.every(cell => allCells[cell].className = "winnerCell")
             allCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
-            ReStartGame()
+            
 
         }else if (xWins){
             Winner.textContent = "Player 2 Wins !! 😄"
             Winner.classList = "alert alert-info";
             Winner.role = "alert"
+            array.every(cell => allCells[cell].className = "winnerCell")
             allCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
-            ReStartGame()
         }
     })
-    ReStartGame()
 }
 
 function ReStartGame(){
